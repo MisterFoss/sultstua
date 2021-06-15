@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SULTSTUA</title>
+    <link rel="stylesheet" href="main.css"/>
 </head>
 <body>
     <header>
@@ -13,50 +14,130 @@
         <h2>
             Qualifier rounds...
         </h2>
-
-
-        <br/>
-        <img/>
-        <input>
-        <form action="index.html" method="POST">
-            <input type="text" name="username">
-            <input type="password" name="password">
-            <input type="submit" value="KLIKK HER FOR Å LOGGE INN">
-        </form>
-        <nav>
-            <ul>
-                <li>
-                    <a href="/index.html">HOME</a>
-                </li>
-                <li>
-                    <a href="/index.html">HOME</a>
-                    <ul>
-                        <li>
-                             <a href="/index.html">HOME</a>
-                        </li>
-                        <li>
-                            <a href="/index.html">HOME</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <ol>
-                <li>
-                    <a href="/index.html">HOME</a>
-                </li>
-                <li>
-                    <a href="/index.html">HOME</a>
-                </li>
-            </ol>
-        </nav>
     </header>
     <main>
+
+
+<!-- Table goes here -->
+
+<script>
+
+let animes = [
+    {
+        title: "The quick brown fox jumps over the lazy dog",
+        poster: "thumbnail.jpg",
+        trailer: "nrk.no",
+        synopsis: `
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Aliquam ultricies finibus ligula, ac iaculis nibh placerat eget.
+            Morbi ultricies, diam id cursus tincidunt, magna quam ornare enim, imperdiet sagittis turpis magna sed urna.
+            Integer ac ex in massa convallis volutpat.
+            Etiam dictum pharetra erat eget tempor.
+            Praesent accumsan ornare dapibus.
+            Integer lacinia vulputate nisi, vel vehicula orci fermentum ut.
+            Mauris iaculis orci in est laoreet, tincidunt pharetra nunc imperdiet.
+       `,
+        points: 0.95,
+        tags: [
+            "horror",
+            "comedy",
+            "something else"
+        ]
+    },
+    {
+        title: "Sphinx of Black Quartz; Judge my Vow!",
+        poster: "thumbnail2.jpg",
+        trailer: "nrk.no",
+        synopsis: `
+            Etiam accumsan porttitor arcu ac luctus.
+            Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+            Fusce tincidunt turpis sed neque condimentum, a dapibus ante consequat.
+            Cras vestibulum libero a urna rutrum dignissim.
+            In eget tristique lorem.
+            Aenean maximus iaculis erat in aliquam.
+
+            Integer nec lacus sit amet magna convallis aliquet.
+            Sed euismod sit amet ex et viverra.
+            Proin lacinia mi ac accumsan blandit.
+            Integer consequat gravida elit, id ultrices nibh rhoncus sed.
+            Morbi nec pharetra eros.
+            Pellentesque vitae sodales enim.
+            Sed orci arcu, imperdiet in dapibus et, vulputate a lectus.
+            Suspendisse mattis egestas pretium.
+        `,
+        points: 0.95,
+        tags: [
+            "action",
+            "adventure",
+            "shounen"
+        ]
+    }
+];
+
+function createCellFromTemplate(anime){
+    let template = document.getElementById("list-cell-template");
+    let cell = template.content.cloneNode(true);
+    cell.querySelector(".poster").setAttribute("src", anime.poster)
+    cell.querySelector(".title").innerText = anime.title;
+    cell.querySelector(".trailer a").setAttribute("href", anime.trailer);
+    cell.querySelector(".trailer a").href = anime.trailer;
+    cell.querySelector(".synopsis").innerText = anime.synopsis;
+    let tags = cell.querySelector(".tags");
+    
+    
+
+    for(let tag of anime.tags){
+        let tagElement = document.createElement("div");
+        tagElement.classList.add("tag");
+        tagElement.dataset["tag"] = tag;
+        tagElement.innerText = tag;
+        tags.appendChild(tagElement);
+    }
+    cell.querySelector(".points").innerText = anime.points;
+    return cell;
+}
+
+function onLoad(){
+    let list = document.querySelector(".list");
+    for(let anime of animes) {
+        list.append(createCellFromTemplate(anime));
+    }
+}
+
+window.addEventListener("load", onLoad);
+
+</script>
+
+
+<template id="list-cell-template">
+    <div class="cell">
+        <div class="splash">
+            <img class="poster" src="" alt="">
+        </div>
+        <div class="info">
+            <h3 class="title"> 
+            </h3>
+            <div class="trailer">
+                <a>Trailer</a>
+            </div>
+            <div class="synopsis">
+            </div>
+            <div class="tags">
+            </div>
+            <div class="points">
+            </div>
+        </div>
+    </div>
+</template>
+
+<div class="list">
+    
+</div>
     </main>
-    <footer></footer>b> world
+    <footer></footer> 
     <script src="main.js"></script>
     <script>
         console.log("HELLO WORLD");
     </script>
-    <link rel="stylesheet" href="main.css"/>
 </body>
 </html> 

@@ -10,3 +10,75 @@ li > ul {
 li:hover > ul {
     display: block;
 }
+body {
+    background-color: white;
+    color: black;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    --cell-gap: 10px;
+}
+
+.cell {
+    flex-basis: calc(50% - var(--cell-gap) * 2);
+    flex-grow: 1;
+    flex-shrink: 1;
+    background-color: red;
+    display: inline-grid;
+    grid-template-columns: 185px auto;
+    /*height: 265px;*/
+    min-width: 370px;
+    opacity: 1;
+    margin: var(--cell-gap);
+}
+.cell .splash {
+    background-color: limegreen;
+    position: relative;
+}
+.cell .splash .poster{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.cell .info {
+    background-color: steelblue;
+    display: grid;
+    grid-template-columns: minmax(270px, auto) 100px;
+    grid-template-rows: 2em 14em 2em;
+
+}
+.cell .info .synopsis {
+    grid-column: 1 / 3;
+    background-color: rgb(77, 57, 167);
+    overflow: auto;
+}
+.cell .info .tags {
+    padding: 2px 6px;
+}
+.cell .info .tags .tag {
+    display: inline-block;
+    background-color: linen;
+    padding: 2px 5px;
+    margin: 2px 3px;
+    border-radius: 9px;
+}
+.cell .info .tags .tag[data-tag="horror"] {
+    background-color: rebeccapurple;
+    color: wheat;
+
+}
+.cell .info .title {
+    margin: 0;
+    line-height: 1em;
+    font-size: 24px;
+    padding: 2px 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.cell .info .points {
+}
