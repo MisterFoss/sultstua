@@ -1,0 +1,13 @@
+version: "3.3"  # optional since v1.27.0
+services:
+  mysql:
+    build: ./servers/mysql
+    ports:
+      - 23306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: testtest123
+    volumes:
+      - mysql:/var/lib/mysql
+volumes:
+  mysql:
+    driver: local
