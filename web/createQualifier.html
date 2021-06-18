@@ -71,7 +71,12 @@ function createCellFromTemplate(anime){
         tagElement.innerText = genre;
         tags.appendChild(tagElement);
     }
-    fragment.querySelector(".points").innerText = anime.averageScore;
+    fragment.querySelector(".points input").value = anime.id;
+    
+    if( ! anime.relations.edges.some(edge => edge.relationType === "PREQUEL")){
+        fragment.querySelector(".points input").checked = "on";
+    }
+
     return fragment;
 }
 
@@ -92,6 +97,7 @@ function createCellFromTemplate(anime){
             <div class="tags">
             </div>
             <div class="points">
+                <input type="checkbox" name="qualified">
             </div>
         </div>
     </div>
@@ -105,12 +111,17 @@ function createCellFromTemplate(anime){
         <option value="FALL">Autumn</option>
     </select>
     <input type="number" id="seasonYear" name="seasonYear" min="1" value="1999">
-    <input type="submit" value="Lag!">
+    <input type="submit" value="Generate">
 </form>
 
 
-<div id="list" class="list">
-</div>
+<form id="create">
+    <div id="list" class="list">
+
+    </div>
+    <input type="text" id="tournamentName", name="tournamentName">
+    <input type="submit" value="Create">
+</form>
 
 
 
@@ -121,7 +132,7 @@ function createCellFromTemplate(anime){
 
         let queryForm = document.getElementById("query");
 
-        let anilistQuery = 
+        let animeList;
 
         queryForm.addEventListener("submit", async function(event) {
             event.preventDefault();
@@ -131,7 +142,7 @@ function createCellFromTemplate(anime){
             let season = queryData.get("season");
             let seasonYear = queryData.get("seasonYear");
 
-            let animeList = await fetchListOfAnime(season, seasonYear);
+            animeList = await fetchListOfAnime(season, seasonYear);
 
 
             let list = document.getElementById("list");
@@ -139,7 +150,37 @@ function createCellFromTemplate(anime){
                 list.append(createCellFromTemplate(anime));
             }
         })
+
+        let createForm = document.getElementById("create");
+        createForm.addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            let createData = new FormData(createForm);
+
+            let name = createData.get("tournamentName");
+            let qualified = createData.getAll("qualified");
+            qualified = qualified.map(id => parseInt(id));
+
+            let list = animeList.filter(anime => qualified.includes(anime.id))
+
+            console.log(name, qualified, list);
+
+            let response = await fetch("http://localhost:5000/createTournament", {
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": JSON.stringify({
+                    name,
+                    list
+                }),
+                "method": "POST",
+                "mode": "no-cors",
+                "credentials": "omit"
+            });
+        })
+
     </script>
+
 
 </body>
 </html> 

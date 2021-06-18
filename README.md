@@ -2,7 +2,7 @@
 
 
 ```
-export $REPO=/path/to/repo
+export REPO=/mnt/d/git/sultstua
 ```
 
 
@@ -25,8 +25,11 @@ Install [flask](https://flask.palletsprojects.com/en/2.0.x/), [sqlalchemy](https
 ```
 cd $REPO/api
 virtualenv .venv;
-.venv/bin/pip install flask alembic flask-sqlalchemy pymysql sqlacodegen
+.venv/bin/pip install flask alembic flask-sqlalchemy pymysql sqlacodegen flask-cors
 ```
+
+
+pip install flask-cors
 
 ### Starting
 
@@ -44,7 +47,7 @@ cd $REPO/api
 source .venv/bin/activate
 export FLASK_APP=server
 alembic upgrade head
-sqlacodegen mysql+pymysql://root:testtest123@localhost:23306/sultstua > autopgen_sqla.py
+sqlacodegen mysql+pymysql://root:testtest123@localhost:23306/sultstua > autogen_sqla.py
 flask run
 ```
 

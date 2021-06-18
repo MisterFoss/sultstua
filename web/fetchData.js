@@ -34,8 +34,8 @@ let query = `
                 averageScore,
                 relations {
                     edges {
-                    id
-                    relationType
+                        id
+                        relationType
                     }
                 }
             }
