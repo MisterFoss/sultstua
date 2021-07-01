@@ -20,16 +20,14 @@ Ensure you're using python 3.x.
 
 Install python's [virtualenv](https://virtualenv.pypa.io/en/latest/) systemwide
 
-Install [flask](https://flask.palletsprojects.com/en/2.0.x/), [sqlalchemy](https://www.sqlalchemy.org/) with [alembic](https://github.com/sqlalchemy/alembic) and [flask-sqlalchemy](https://github.com/pallets/flask-sqlalchemy) inside the virtualenv
+Install [flask](https://flask.palletsprojects.com/en/2.0.x/
 
 ```
 cd $REPO/api
 virtualenv .venv;
-.venv/bin/pip install flask alembic flask-sqlalchemy pymysql sqlacodegen flask-cors
+.venv/bin/pip install flask pymysql flask-cors
 ```
 
-
-pip install flask-cors
 
 ### Starting
 
@@ -46,8 +44,6 @@ docker-compose up -d
 cd $REPO/api
 source .venv/bin/activate
 export FLASK_APP=server
-alembic upgrade head
-sqlacodegen mysql+pymysql://root:testtest123@localhost:23306/sultstua > autogen_sqla.py
 flask run
 ```
 
