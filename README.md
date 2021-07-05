@@ -2,7 +2,7 @@
 
 
 ```
-export REPO=/mnt/d/git/sultstua
+    export REPO=/mnt/d/git/sultstua
 ```
 
 

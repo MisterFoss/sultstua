@@ -92,3 +92,44 @@ body {
 .cell .info .trailer a {
     
 }
+.tourCell {
+    flex-basis: calc(50% - var(--cell-gap) * 2 - var(--cell-padding) * 2);
+    flex-grow: 1;
+    flex-shrink: 1;
+    /* display: inline-grid; */
+    /* grid-template-columns: 185px auto; */
+    height: 200px;
+    min-width: 150px;
+    opacity: 1;
+    /* margin: var(--cell-gap); */
+    /* background-color: var(--poster-color); */
+    /* padding: var(--cell-padding); */
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px #000a;
+}
+
+.tourCell .tourSplash {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-image:
+        linear-gradient(to bottom, #000a, #0000),
+        var(--background-image-url)
+    ;
+    border-radius: 7px;
+}
+.tourCell .tourSplash .tourName{
+    position: absolute;
+    left: 0; right: 0; bottom: 0; top: 0;
+    padding: 5px;
+    color: rgb(216, 204, 204);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.tourCell .tourSplash .tourPoster{
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}

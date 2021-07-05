@@ -62,3 +62,118 @@
     SERVER -> -PHP- Express.js (js), django (py), ...
 
 8. Responsivity
+
+
+
+
+
+
+
+
+
+
+
+
+### SQL
+
+
+[x] Velg alle animene som hører til en gitt turnering med id X
+
+```
+select anime.*
+    from tournament_anime
+    join anime on anime_id = anime.id
+	where tournament_id = 8;
+```
+
+[x] Skap en tabell for dommere. Med id (primary key, int, auto increment), navn (text)
+create table dommer(
+	id int primary key not null auto_increment,
+    name varchar(255));
+
+
+[x] Legge inn noen dommere manuelt
+insert into dommer(name)
+	value('bruker1');
+
+
+[z] Forandre på turnering-tabellen til å inkludere en "skapt dato"-kolonne. 
+alter table tournament
+	add datoSkapt date default(curdate());
+
+
+
+[x] Create a prelimary score table `tournament_prelims`
+    id (int, primary key),
+    dommer_id (int, foreign key),
+    tournament_anime_id (int, foreign key),
+    score (int),
+    review (text, null)
+    UNIQUE (dommer_id, tournament_anime_id)
+
+create table tournament_prelim(
+	id int AUTO_INCREMENT primary key,
+	dommer_id int, 
+    tournament_anime_id int,
+    score int, 
+    review int null,
+    foreign key (dommer_id) 
+		references dommer(id),
+    foreign key (tournament_anime_id) 
+		references tournament_anime(id),
+    constraint no_multiscoring unique(dommer_id, tournament_anime_id) );
+    
+
+
+[x] Given a user_id, tournament_id, and anilist_id, insert a score into the tou_prelims table.
+
+INSERT INTO tournament_prelim
+    (dommer_id, tournament_anime_id, score)
+SELECT 1 as dommer_id, ta.id as tournament_anime_id, 123 as score
+    FROM tournament_anime as ta
+    WHERE anime_id = 34 and tournament_id = 8;
+
+
+[x] Update a tournament, and change its name.
+UPDATE tournament
+    SET name='the first'
+    WHERE id = 8;
+
+[] Update a score for a particular user/tournamnet/anime combo
+
+
+anime_id
+tournament_id
+dommer_id
+new_score
+
+
+
+
+
+
+
+
+
+
+
+Frontend-backend-needs:
+
+
+- [x] create tournament (createQualifier)
+- [ ] list tournaments (listTournaments)
+    - [ ] api: endpoint to get all tournament names with id
+    - [ ] web: page that loads tournaments, and displays them
+    - [ ] api: endpoint to get tournament image as image.
+- [ ] show one tournament, with animes (list tournament links, including judge creation, etc.)
+- [ ] edit a tournament name
+- [ ] create new judge
+- [ ] list judges
+- [ ] edit a judge
+- [ ] remove a judge
+- [ ] make a preliminaries page listing judges and scoring
+- [ ] let a judge score in preliminaries, and edit their score. (including a review!)
+- [ ] show the 16 contestants after the preliminaries
+- [ ] Phase 2: Brackets and stages.
+- [ ] Stretchgoal: Collage of anime pictures as a tournament picture.
+- [ ] Stretchgoal: IMPORT/EXPORT TO GOOGLE SHEETS IN A BEAUTIFUL MANNER!

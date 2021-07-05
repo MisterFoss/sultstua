@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SULTSTUA</title>
+    <link rel="stylesheet" href="main.css"/>
+</head>
+
+<body>
+
+    <script>
+        let tourList = [
+            {id: 1, name: "asd", image: "thumbnail2.jpg"},
+            {id: 2, name: "dsf", image: "thumbnail2.jpg"},
+            {id: 3, name: "fgh", image: "thumbnail2.jpg"},
+            {id: 4, name: "ghj", image: "thumbnail2.jpg"},
+        ]
+    </script>
+    <H1>
+        List of tournaments!!!
+    </H1>
+    <div id="List" class="list">
+
+    </div>
+
+
+
+
+
+
+
+
+   
+
+</body>
+
+<script>
+    function creatTourCellFromTemplate(tour){
+        let template = document.getElementById("tour_splash_template");
+        let fragment = template.content.cloneNode(true);
+
+
+        fragment.querySelector(".tourSplash").setAttribute("style", `--background-image-url:url(${tour.image})`);
+        fragment.querySelector(".tourName").innerText=tour.name;
+
+        
+        let searchParams = new URLSearchParams();
+        searchParams.set("tournamentId", tour.id)
+        let url = "/displayTournament.html?" + searchParams.toString();
+        fragment.querySelector(".tourName").href = url;
+        
+        return fragment;
+    }
+    function makeList(listOfTour){
+        let list = document.getElementById("List");
+        
+        for(let tour of listOfTour){
+            list.append(creatTourCellFromTemplate(tour));
+        }
+    }
+
+    async function onLoad(){
+        let response = await fetch("http://localhost:5000/index", {
+            "method": "GET",
+            "mode": "cors",
+            "credentials": "omit"
+        });
+        let json = await response.json();
+        makeList(json);
+
+    }
+    window.addEventListener("load", onLoad);
+</script>
+
+
+
+
+
+
+<template id=tour_splash_template>
+    <div class="tourCell">
+        <div class="tourSplash" style="--background-image-url: url(thumbnail2.jpg);">
+            <a class="tourName">
+            </a>
+        </div>
+    </div>
+</template>
