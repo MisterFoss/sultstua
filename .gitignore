@@ -16,7 +16,4 @@ docs/_build/
 __pycache__
 
 
-
-# autogen
-
-autogen_*
+secrets/prod

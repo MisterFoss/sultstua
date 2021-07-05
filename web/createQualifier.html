@@ -165,7 +165,7 @@ function createCellFromTemplate(anime){
 
             console.log(name, qualified, list);
 
-            let response = await fetch("http://localhost:5000/createTournament", {
+            let response = await fetch("/api/createTournament", {
                 "headers": {
                     "content-type": "application/json"
                 },

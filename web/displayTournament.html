@@ -140,7 +140,7 @@ function makeList(listOfAni){
     }
 
     async function onLoad(){
-        let response = await fetch("http://localhost:5000/getTournament/"+tourId, {
+        let response = await fetch("/api/getTournament/"+tourId, {
             "method": "GET",
             "mode": "cors",
             "credentials": "omit"

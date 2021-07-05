@@ -1,0 +1,4 @@
+flask
+PyMySQL[rsa]
+flask-cors
+python-dotenv
