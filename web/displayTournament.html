@@ -142,8 +142,6 @@ function makeList(listOfAni){
     async function onLoad(){
         let response = await fetch("/api/getTournament/"+tourId, {
             "method": "GET",
-            "mode": "cors",
-            "credentials": "omit"
         });
         let json = await response.json();
         document.querySelector(".header").innerText=json.tournamentName

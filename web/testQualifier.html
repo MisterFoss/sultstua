@@ -96,8 +96,6 @@ function createCellFromTemplate(anime){
         async function fetchQualifier(){
             let response = await fetch("/api/testQualifier", {
                 "method": "GET",
-                "mode": "cors",
-                "credentials": "omit"
             });
             console.log(response, response.status);
             let json = await response.json();

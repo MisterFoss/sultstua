@@ -63,8 +63,6 @@
     async function onLoad(){
         let response = await fetch("api/index", {
             "method": "GET",
-            "mode": "cors",
-            "credentials": "omit"
         });
         let json = await response.json();
         makeList(json);

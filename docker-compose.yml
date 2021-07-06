@@ -5,14 +5,16 @@ services:
     expose:
       - '8001'
     ports:
-      - 8001:8001
+      - 127.0.0.1:8001:8001
     volumes:
       - ./servers/nginx/conf.d/:/etc/nginx/conf.d/
       - ./servers/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./web:/var/www/sultstua/html
     restart: unless-stopped
     networks:
-      - sultstua-external
+      sultstua-external:
+        aliases:
+          - sultstua-main
     depends_on:
       - api
   api:
@@ -30,6 +32,7 @@ services:
     networks:
       - sultstua-internal
       - sultstua-external
+    command: /root/.local/bin/uwsgi --socket 0.0.0.0:5000 --manage-script-name --mount /=server:app --py-autoreload=${UWSGI_AUTO_RELOAD}
     depends_on:
       - mysql
   mysql:

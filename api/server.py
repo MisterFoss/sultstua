@@ -6,7 +6,7 @@ import sys
 from dotenv import dotenv_values
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 env = dotenv_values("/run/secrets/flask.env")
 if env is None:
@@ -55,7 +55,7 @@ def close_db(error):
 
 
 
-@app.route("/")
+@app.route('/api')
 def main():
     return "Hello World!"
 
@@ -89,7 +89,7 @@ VALUES
     (%s,%s)
 """
 
-@app.route('/createTournament', methods=['POST'])
+@app.route('/api/createTournament', methods=['POST'])
 def createTournament():
     tournamentData = request.get_json(force=True)
     cursor = get_db().cursor()
@@ -119,17 +119,11 @@ def createTournament():
     return "Added!"
 
 
-if __name__ == "__main__":
-    app.run()
-
-
-
-
 
 sql_get_all_anime = """
     SELECT * FROM `anime`
 """
-@app.route('/testQualifier')
+@app.route('/api/testQual')
 def displayQualifier():
     dataList = []
     cursor = get_db().cursor()
@@ -160,7 +154,7 @@ sql_get_tournament_name = """
     WHERE id = %s
 """
 # /getTournament/8
-@app.route('/getTournament/<int:tournament_id>')
+@app.route('/api/getTournament/<int:tournament_id>')
 def displayPreliminaryForTournament(tournament_id):
     dataList = []
     cursor = get_db().cursor()
@@ -192,11 +186,12 @@ SELECT *
     FROM tournament;
 """
 
-@app.route("/index")
+@app.route('/api/index')
 def getTourList():
     cursor = get_db().cursor()
     cursor.execute(sql_get_tournament_index)
     rows = cursor.fetchall();
+    print(rows)
     return jsonify(rows)
 
 sql_get_dommer_name = """
@@ -212,7 +207,7 @@ sql_write_dommer_score = """
         WHERE anime_id = %s and tournament_id = %s;
     """
 
-@app.route('/scoreAnime', methods=['POST'])
+@app.route('/api/score', methods=['POST'])
 def scoreAnime():
     scoreData = request.get_json(force=True)
 
@@ -243,9 +238,15 @@ sql_write_dommer_score = """
     ) as new
     ON DUPLICATE KEY UPDATE score = new.score;
     """
-@app.route("/test")
+@app.route("/api/test")
 def test():
     cursor = get_db().cursor()
     cursor.execute(sql_write_dommer_score, (1, 34, 63, 9))
     # rows = cursor.fetchall();
     return 
+
+
+
+
+if __name__ == "__main__":
+    app.run()
