@@ -16,6 +16,7 @@ Follow the instructions to install [docker](https://docs.docker.com/engine/insta
 
 ```
 cd $REPO
+sudo service docker start
 docker-compose up -d
 ```
 

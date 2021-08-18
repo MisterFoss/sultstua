@@ -39,6 +39,8 @@ services:
     build: ./servers/mysql
     expose:
       - '3306'
+    ports:
+      - 127.0.0.1:23306:3306
     secrets:
       - mysql_root_password
       - mysql_user_password
@@ -49,7 +51,7 @@ services:
       - ./secrets/${SECRET_SOURCE}/mysql.env
     volumes:
       - mysql:/var/lib/mysql
-      - ./api/db:/app/db
+      - ./servers/mysql/db:/app/db
     networks:
       - sultstua-internal
 

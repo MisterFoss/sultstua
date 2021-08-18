@@ -61,9 +61,7 @@
     }
 
     async function onLoad(){
-        let response = await fetch("api/index", {
-            "method": "GET",
-        });
+        let response = await fetch("/api/index");
         let json = await response.json();
         makeList(json);
 

@@ -31,127 +31,89 @@
                 }
             </style>
         </h2>
-        <script>
-            let userName = localStorage.getItem("userName");
-            if(userName) {
-                document.body.setAttribute("data-user", userName);
-                document.getElementById("loggedInAs").innerText = userName;
-            } else {
-                document.body.removeAttribute("data-user");
-            }
-
-
-            let loginButton = document.getElementById("login-button");
-            loginButton.addEventListener("click", () => {
-                let userName = prompt("Who are you?");
-                console.log("userName", userName);
-                if(!userName){
-                    return;
-                }
-                localStorage.setItem('userName', userName);
-                document.body.setAttribute("data-user", userName);
-                document.getElementById("loggedInAs").innerText = userName;
-            })
-            let logoutButton = document.getElementById("logout-button");
-            logoutButton.addEventListener("click", () => {
-                localStorage.removeItem('userName');
-                document.body.removeAttribute("data-user");
-                document.getElementById("loggedInAs").innerText = "";
-            })
-        </script>
+        <h3>
+            <span class="finalize">
+                Move form Prelim to Tournament
+                <button id="finalize-button">
+                    OK
+                </button>
+        </h3>
     </header>
     <div id="list" class="list">
 
     </div>
 </body>
-<script>
+<script type="module">
+    import {displayLogin} from './view/user.js';
+    import {postJson} from './utils/utils.js';
+    import {makeQualifierList} from './view/qualifierList.js';
+
+    displayLogin();
 
     let searchParams = new URLSearchParams(window.location.search);
     let tourId = searchParams.get("tournamentId");
 
-    function createCellFromTemplate(anime){
-    let template = document.getElementById("list-cell-template");
-    let fragment = template.content.cloneNode(true);
 
-    fragment.querySelector(".poster").setAttribute("src", anime.coverImage.large)
-    fragment.querySelector(".cell").setAttribute("style", `--poster-color:${anime.coverImage.color};`);
+    /**
+     * 
+    tour["animes"] = dataList
+    tour["tournamentName"] = db.getTournamentName(tournamentId)
+    tour["score"] = db.getTournamentScore(tournamentId)
+    tour["stage"] = db.getTournamentStage(tournamentId)
 
-
-    let title;
-    if(anime.title.english) {
-        title = anime.title.english;
-    } else {
-        title = anime.title.romaji;
-    }
-    fragment.querySelector(".title").innerText = title;
-
-
-    if(anime.trailer){
-        let trailerHref;
-        if(anime.trailer.site === "youtube"){
-            trailerHref = `https://www.youtube.com/watch?v=${anime.trailer.id}`
-        } else {
-            trailerHref = "#";
-        }
-        fragment.querySelector(".trailer a").href = trailerHref;
-    } else {
-        fragment.querySelector(".trailer a").remove();
+    {
+        animes: Array<{
+            id: number <-- anilist_id,
+            ...
+        }>
+        score: Array<{
+            anilist_id: number,
+            score: number
+        }>,
+        tournamentName: string,
+        stage: 1 | 2
     }
 
-    fragment.querySelector(".synopsis").innerHTML = anime.description;
-
-    let tags = fragment.querySelector(".tags");
-    for(let genre of anime.genres){
-        let tagElement = document.createElement("div");
-        tagElement.classList.add("tag");
-        tagElement.dataset["tag"] = genre.toLowerCase();
-        tagElement.innerText = genre;
-        tags.appendChild(tagElement);
-    }
-
-    let points = fragment.querySelector(".points");
-    points.innerText = "N/A";
-
-    function askForScore(){
-        let score = prompt("Give a score between 0 and 100");
-        if(score == null){
-            return;
-        }
-        score = parseInt(score);
-        if(isNaN(score) || score < 0 || score > 100){
-            alert("Score must be a number between 0 and 100.");
-            return askForScore();
-        }
-
-        console.log("user", userName, "gave score", score, "to anime", anime.id, title)
-    }
-    points.addEventListener("click", askForScore)
-
-
-    return fragment;
-}
-
-function makeList(listOfAni){
-        let list = document.getElementById("list");
-        
-        for(let tour of listOfAni){
-            list.append(createCellFromTemplate(tour));
-        }
-    }
-
+     */
+    let tournamentData;
     async function onLoad(){
         let response = await fetch("/api/getTournament/"+tourId, {
             "method": "GET",
         });
-        let json = await response.json();
-        document.querySelector(".header").innerText=json.tournamentName
-        makeList(json.animes);
+        tournamentData = await response.json();
+        console.log(tournamentData);
+        document.querySelector(".header").innerText=tournamentData.tournamentName
+        if (tournamentData.stage == 1){
+            makeQualifierList(tournamentData)
+        }
+        else if(tournamentData.stage == 2){
+            createBracket(tournamentData)
+        };
 
-    }
+    };
     window.addEventListener("load", onLoad);
 
 
+    let finalizeButton= document.getElementById("finalize-button");
+    finalizeButton.addEventListener("click", prelimToBrackets());
 
+
+function getScoreByAnilistId(anilistId){
+    for(let item of tournamentData.score){
+        if(item.anilist_id === anilistId){
+            return item.score;
+        }
+    }
+    return null;
+}
+
+    function prelimToBrackets(){
+        
+    }
+
+    function createBracket(){
+
+}
 
 </script>
 
@@ -176,6 +138,9 @@ function makeList(listOfAni){
         </div>
 </template>
 
+<template id="tournament-bracket">
+</template>
+
 <template>
     <form class="score-form">
         <input type="hidden" name="animeId" value="">
@@ -183,3 +148,4 @@ function makeList(listOfAni){
         <input type="submit" value="send">
     </form>
 </template>
+
