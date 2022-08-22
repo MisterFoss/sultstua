@@ -1,0 +1,93 @@
+
+.header {
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: #333333;
+    color: #dd6f96;
+    font-size: xx-large;
+    padding: 20px 0 20px;
+    z-index: 3;
+  }
+  .header b {
+    color: white;
+  }
+
+  .header a {
+    text-decoration-style: inherit;
+    color: inherit;
+  }
+    
+  .logInButton {
+    top: 7px;
+    right: 16px;
+    border: #111111;
+    position: fixed;
+    align-items: center;
+    background-color: #dd6f96;
+    border-radius: 24px;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-size: 14px;
+    font-weight: bold;
+    height: 44px;
+    justify-content: center;
+    letter-spacing: .25px;
+    max-width: 100%;
+    overflow: visible;
+    padding: 0px 30px;
+    text-align: center;
+    width: auto;
+    z-index: 6;
+  }
+  
+
+
+.topbar {
+    z-index: 3;
+    position: sticky;
+    top: 0;
+    font-size: x-large;
+    background-color: #333333;
+    height: 64px;
+  }
+  
+
+.categoryTopBar { 
+    width: 100%;
+    position: sticky;
+    top: 0;
+  
+  }
+  
+  .topbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #333333;
+    height: 100%;
+    width: 100%;
+    
+  }
+  
+  .topbar li {
+    float: left;
+    top: 0;
+    
+  }
+  
+  .topbar li a {
+    
+    display: block;
+    color: lightgray;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+  }
+  
+  .topbar li a:hover {
+    background-color: #111111;
+  }

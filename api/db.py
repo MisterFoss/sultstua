@@ -6,16 +6,16 @@ import json
 from config import get_db;
 
 
-def createTournament(name):
+def createTournament(name, splash):
     cursor = get_db().cursor()
     cursor.execute(
         """
         INSERT INTO `tournament`
-            (name)
+            (name, splash)
         VALUES
-            (%s)
+            (%s, %s)
         """,
-        (name,)
+        (name, splash)
     )
     return cursor.lastrowid
 

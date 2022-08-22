@@ -12,7 +12,7 @@ create table `tournament` (
     id int not null primary key auto_increment,
     name text not null,
     dateCreated date default(curdate()),
-    splash text
+    splash MEDIUMTEXT
 );
 
 

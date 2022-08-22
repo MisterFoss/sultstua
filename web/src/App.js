@@ -1,25 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
-import {Cell} from "./components/Cell"
-import {getTourData} from "./service/api"
-import { useState } from 'react';
+import { Tour } from './pages/Tour';
+import {TourList} from "./pages/TourList.js"
+import {
+	BrowserRouter,
+	Route,
+	Routes
+} from "react-router-dom";
+import CreateTour from './pages/CreateTour';
+import Canvas from './components/Canvas';
 
-
-function App() {
-  
-  const [tourData, setTourData] = useState(null);
-  getTourData(1).then(setTourData)
-  if(tourData == null) {
-    return null
-  }
-  return (
-    <div className="App">
-      <h1 className='tourName'>
-        {tourData.tournamentName}
-      </h1>
-      {tourData.animes.map(anime => <Cell anime={anime}/>)} 
-    </div>
-  );
+export default function App() {
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<TourList/>}/>
+                    <Route path='/tournament/:id' element={<Tour/>}/>
+                    <Route path="/createTournament" element={<CreateTour/>}/>
+                    <Route path="/image" element={<Canvas/>}/>
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
 }
 
-export default App;
+

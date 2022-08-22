@@ -5,13 +5,15 @@ import json
 import db
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/api/createTournament', methods=['POST'])
 def createTournament():
     tournamentData = request.get_json(force=True)
 
-    tournamentId = db.createTournament(tournamentData["name"])
+    tournamentId = db.createTournament(tournamentData["name"], tournamentData["splash"])
+
     print("Created tournament with id = %i" % (tournamentId))
 
     animeIds = list()
@@ -52,7 +54,7 @@ def displayPreliminaryForTournament(tournamentId):
     return jsonify(tour)
 
 
-@app.route('/api/index')
+@app.route('/api/getTourList')
 def getTourList():
     return jsonify(db.getTournaments())
 
