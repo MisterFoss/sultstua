@@ -43,7 +43,7 @@ let query = `
     }
 `;
 
-export async function fetchListOfAnime(season, seasonYear){
+export async function fetchAnimeBySeason(season, seasonYear){
 
     let response = await fetch("https://graphql.anilist.co/", {
         "headers": {

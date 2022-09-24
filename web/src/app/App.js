@@ -1,13 +1,12 @@
 import './App.css';
-import { Tour } from './pages/Tour';
-import {TourList} from "./pages/TourList.js"
+import { Tour } from '../pages//tourView/Tour';
+import {TourList} from "../pages/tourIndex/TourList.js"
 import {
 	BrowserRouter,
 	Route,
 	Routes
 } from "react-router-dom";
-import CreateTour from './pages/CreateTour';
-import Canvas from './components/Canvas';
+import CreateTour from '../pages/createTour/CreateTour';
 
 export default function App() {
     return (
@@ -17,7 +16,6 @@ export default function App() {
                     <Route path="/" element={<TourList/>}/>
                     <Route path='/tournament/:id' element={<Tour/>}/>
                     <Route path="/createTournament" element={<CreateTour/>}/>
-                    <Route path="/image" element={<Canvas/>}/>
                 </Routes>
             </BrowserRouter>
         </div>

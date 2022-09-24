@@ -1,6 +1,4 @@
-import { useRef } from "react"
-import { useEffect } from "react"
-import "./Canvas.css"
+import { useRef, useEffect } from "react"
 
 
 export default function Canvas({draw}) {
@@ -12,5 +10,5 @@ export default function Canvas({draw}) {
         draw(canvas)
       }, [draw])
 
-    return <canvas ref={canvasRef}></canvas>
+    return <canvas ref={canvasRef} style={{background:"blue"}}></canvas>
 } 

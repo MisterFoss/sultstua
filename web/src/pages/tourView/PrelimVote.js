@@ -1,4 +1,4 @@
-import { voteToPrelim } from "../service/api"
+import { voteToPrelim } from "../../app/api"
 
 
 

@@ -1,9 +1,9 @@
 import { useState } from "react"
-import {Cell, PrelimCell} from "../components/cells/Cell"
-import {getTourData} from "../service/api"
-import { useApi } from "../components/hooks/useApi";
 import { useParams } from "react-router-dom";
-import Layout from "../components/Layout";
+import { getTourData } from "../../app/api";
+import Layout from "../../app/layout/Layout";
+import { useApi } from "../../utils/useApi";
+import { Cell, PrelimCell } from "./Cell";
 import "./Tour.css" 
 
 
@@ -46,10 +46,10 @@ export function Tour() {
       </h1>
       <div className="tour">
         <div className="list">
-          {tourData.animes.map(anime => <Cell tourId={id} anime={anime} key={anime.id}/>)}
-          {/* {tourData.animes.map(anime => <PrelimCell tourId={id} anime={anime} scores={scoreObj} key={anime.id}/>)}  */}
+          {/* {tourData.animes.map(anime => <Cell tourId={id} anime={anime} key={anime.id}/>)} */}
+          {tourData.animes.map(anime => <PrelimCell tourId={id} anime={anime} scores={scoreObj} key={anime.id}/>)} 
         </div>
-        {/* <div className="animeDetails">hi</div> */}
+        <div className="animeDetails">hi</div>
       </div>
     </Layout>
   );

@@ -1,7 +1,7 @@
-import TourCell from "../components/cells/TourCell";
-import {getTourList} from "../service/api"
-import { useApi } from "../components/hooks/useApi";
-import Layout from "../components/Layout";
+import { getTourList } from "../../app/api";
+import Layout from "../../app/layout/Layout";
+import { useApi } from "../../utils/useApi";
+import TourCell from "./TourCell";
 
 
 export function TourList() {

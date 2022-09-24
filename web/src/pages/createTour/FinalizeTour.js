@@ -1,18 +1,15 @@
-import { tourDataToDatabase } from "../service/api"
-import { drawTileImage, makeImgList } from "../service/makeImg"
+import { tourDataToDatabase } from "../../app/api"
+import { drawTourImage } from "./drawTourImage"
 
 
-
-
-export default function FinalizeTour({transformSelected, createTourData}) {
+export default function FinalizeTour({transformSelected, listOfSelected}) {
     
     async function onSubmit(event) {
         event.preventDefault()
         let formData = new FormData(event.target)
         let {tourName} = Object.fromEntries(formData)
-        let animeList = createTourData()
-        let splash = drawTileImage(await makeImgList(animeList, true)).toDataURL("image/webp")
-        await tourDataToDatabase(tourName, splash, animeList)
+        let splash = await drawTourImage(listOfSelected)
+        await tourDataToDatabase(tourName, splash, listOfSelected)
     }
     return (
         <>

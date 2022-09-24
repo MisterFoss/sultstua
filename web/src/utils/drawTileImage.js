@@ -1,25 +1,5 @@
 
 
-export async function makeImgList(animeData, CO=false) {
-
-    let list = animeData
-        .sort((a, b)=> b.popularity - a.popularity)
-        .map(anime=> anime.coverImage.large)
-        .map(src=>{
-            let img = new Image()
-            if(CO) {img.crossOrigin="anonymous"}
-            img.src = src
-            return new Promise((resolve, reject)=> {
-                img.onload = ()=>resolve(img)
-                img.onerror = (error)=>reject(error.toString())
-            })
-        })
-    return await Promise.all(list)
-}
-
-
-
-
 
 export function drawTileImage(images, canvas, tileWidth=100, tileHeight=150) {
 
