@@ -1,4 +1,4 @@
-import TourCell from "../components/TourCell";
+import TourCell from "../components/cells/TourCell";
 import {getTourList} from "../service/api"
 import { useApi } from "../components/hooks/useApi";
 import Layout from "../components/Layout";

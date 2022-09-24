@@ -39,3 +39,18 @@ export async function tourDataToDatabase(name, splash, list){
         "method": "POST",
     });
 }
+
+export async function voteToPrelim(anilist_id, tour_id, judge_id, score){
+    let response = await fetch("http://localhost:8001/api/vote", {
+        "headers": {
+            "content-type": "application/json"
+        },
+        "body": JSON.stringify({
+            anilist_id,
+            tour_id,
+            judge_id,
+            score
+        }),
+        "method": "POST",
+    });
+}

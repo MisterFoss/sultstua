@@ -1,13 +1,13 @@
 
 
-export async function makeImgList(animeData) {
+export async function makeImgList(animeData, CO=false) {
 
     let list = animeData
         .sort((a, b)=> b.popularity - a.popularity)
         .map(anime=> anime.coverImage.large)
         .map(src=>{
             let img = new Image()
-            img.crossOrigin="anonymous"
+            if(CO) {img.crossOrigin="anonymous"}
             img.src = src
             return new Promise((resolve, reject)=> {
                 img.onload = ()=>resolve(img)

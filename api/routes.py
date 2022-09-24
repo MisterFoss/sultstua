@@ -1,3 +1,4 @@
+from socket import socket
 from flask import Flask, request, jsonify, g
 from flask_cors import CORS
 import json
@@ -59,28 +60,29 @@ def getTourList():
     return jsonify(db.getTournaments())
 
 
-@app.route('/api/score', methods=['POST'])
+@app.route('/api/vote', methods=['POST'])
 def scoreAnime():
-    scoreData = request.get_json(force=True)
+    voteData = request.get_json(force=True)
 
-    tournamentId = scoreData["tournamentId"] 
-    anilistId = scoreData["animeId"]
-    judgeName = scoreData["judgeName"]
-    score = scoreData["score"]
+    tour_id = int(voteData["tour_id"]) 
+    anilist_id = int(voteData["anilist_id"])
+    judge_id = int(voteData["judge_id"])
+    score = int(voteData["score"])
 
-    judgeId = db.getJudgeIdByName(judgeName)
-    if judgeId is None:
-        return "Judgement: Denied!", 401
+    # judgeId = db.getJudgeIdByName(judgeName)
+    # if judgeId is None:
+    #     return "Judgement: Denied!", 401
     
-    animeId = db.getAnimeIdByAnilistId(anilistId)
-    if animeId is None:
-        return "Which anime is that?", 422
+    # animeId = db.getAnimeIdByAnilistId(anilistId)
+    # if animeId is None:
+    #     return "Which anime is that?", 422
 
-    db.writeJudgeScore(tournamentId, animeId, judgeId, score)
+    # db.writeJudgeScore(tournamentId, animeId, judgeId, score)
+    db.votePrelim(anilist_id, tour_id, judge_id, score)
 
-    scoreList = db.getTournamentScore(tournamentId, animeId)
-    print(scoreList)
-    return jsonify(scoreList)
+    # scoreList = db.getTournamentScore(tournamentId, animeId)
+    print(anilist_id, tour_id, judge_id, score)
+    return jsonify(anilist_id, tour_id, judge_id, score)
 
 
 @app.route("/api/test")

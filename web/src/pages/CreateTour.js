@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Canvas from "../components/Canvas"
-import { SelectableCell } from "../components/Cell"
+import { SelectableCell } from "../components/cells/Cell"
 import FinalizeTour from "../components/FinalizeTour"
 import Layout from "../components/Layout"
 import SeasonSelect from "../components/SeasonSelect"
