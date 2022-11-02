@@ -1,18 +1,19 @@
 import { useState } from "react"
 import Layout from "../../app/layout/Layout"
 import { useApi } from "../../utils/useApi"
+import { addWaitBeforeFunction } from "../../utils/waitFunctions"
 import { drawTourImage } from "./drawTourImage"
 import FinalizeTour from "./FinalizeTour"
 import SeasonSelect from "./SeasonSelect"
 import { SelectableCell } from "./SelectableCell"
-
+import "../tourView/Cell.css"
 
 
 export default function CreateTour() {
     
     let [anilistData, setAnilistData] = useState(null) 
     let [selectedAnime, setSelectedAnime] = useState({})
-    let tourImage = useApi(drawTourImage, getListOfSelected())
+    let tourImage = useApi(addWaitBeforeFunction(drawTourImage, 0), getListOfSelected())
 
     function getListOfSelected(){
         return anilistData?.filter(anime=>selectedAnime[anime.id]) ?? []

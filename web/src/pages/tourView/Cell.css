@@ -45,13 +45,13 @@ body {
 
 }
 
-.splash {
+.cell .splash {
     position: relative;
 }
-.splash .poster{
+.cell .splash .poster{
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
 }
 .cell .info {
@@ -94,9 +94,4 @@ body {
     overflow: hidden;
     white-space: nowrap;
     font-family: serif;
-}
-.cell .info .points {
-}
-.cell .info .trailer a {
-    
 }

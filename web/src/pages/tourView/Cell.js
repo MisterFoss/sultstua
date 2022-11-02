@@ -46,9 +46,15 @@ export function Cell(props) {
 
 
 
-export function PrelimCell({anime, tourId, scores}) {
+export function PrelimCell({anime, tourId, scores, setSelectedAnime}) {
+    
+    function onClick(id) {
+        setSelectedAnime(id)
+        console.log(id)
+    }
+    
     return (
-        <div className="prelimCell" style={{"--poster-color": anime.coverImage.color}}>
+        <div onClick={()=>onClick(anime.id)} className="prelimCell" style={{"--poster-color": anime.coverImage.color}}>
             <div className="splash">
                 <img className="poster" src={anime.coverImage?.large} alt="Anime Poster"/>
                 <div className="animeName">
@@ -56,7 +62,6 @@ export function PrelimCell({anime, tourId, scores}) {
                 </div>
                 <div className="pointSum">
                     {prelimPointSum(anime, scores)}
-                    <PrelimVote anime={anime} tourId={tourId}/>
                 </div>
             </div>
         </div>

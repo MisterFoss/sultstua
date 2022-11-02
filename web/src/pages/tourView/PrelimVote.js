@@ -8,8 +8,6 @@ export default function PrelimVote(props) {
         event.preventDefault()
         let formData = new FormData(event.target)
         let {score, judgeId} = Object.fromEntries(formData)
-        // let animeList = createTourData()
-        // let splash = drawTileImage(await makeImgList(animeList, true)).toDataURL("image/webp")
         await voteToPrelim(props.anime.id, props.tourId, judgeId, score)
     }
 
