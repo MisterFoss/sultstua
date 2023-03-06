@@ -1,0 +1,68 @@
+.tour {
+    /* background-color: aqua; */
+    display: flex;
+    width: auto;
+    height: auto;
+}
+
+.list {
+    /* background-color: aquamarine; */
+    /* min-width: 50%; */
+    /* height: 100%; */
+}
+.list .splash {
+    /* max-width: 180px; */
+    /* max-height: 300px; */
+}
+
+.animeDetails {
+    background-color: rebeccapurple;
+    min-width: 50%;
+    display: grid;
+    grid-template-columns: 225px auto;
+    grid-template-rows: 350px auto;
+}
+
+.animeDetails .splash {
+    background-color: red;
+}
+
+.animeDetails .splash img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.animeDetails .trailer {
+    height: auto;
+    width: auto;
+    background-color: aqua;
+}
+
+,.animeDetails .sideInfo {
+    background-color: greenyellow;
+}
+.animeDetails .descriptionBox {
+    background-color: pink;
+}
+
+.animeDetails .trailer .embedTrailer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+
+
+
+.voteElem {
+    width: 100%;
+    display: flex;
+    background-color: beige;
+}
+
+.voteElem .points {
+    width: 100%;
+    text-align: right;
+}

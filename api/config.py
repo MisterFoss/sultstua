@@ -6,7 +6,7 @@ import sys
 from dotenv import dotenv_values
 
 app = Flask(__name__)
-# CORS(app)
+CORS(app)
 
 env = dotenv_values("/run/secrets/flask.env")
 if env is None:

@@ -1,0 +1,86 @@
+
+
+b {
+    color: steelblue;
+}
+
+li > ul {
+    display: none;
+}
+
+li:hover > ul {
+    display: block;
+}
+body {
+    background-color: white;
+    color: black;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    --cell-gap: 10px;
+    --cell-padding: 5px;
+}
+
+.prelimCell {
+    /* flex-basis: calc(50% - var(--cell-gap) * 2 - var(--cell-padding) * 2); */
+    background-image: linear-gradient(to top, rgba(255,0,0,0), rgba(0,0,0,0.6));
+    flex-grow: 1;
+    flex-shrink: 1;
+    /* display: inline-grid; */
+    height: auto;
+    width: auto;
+    max-width: 300px;
+    opacity: 1;
+    margin: var(--cell-gap);
+    /* background-color: var(--poster-color); */
+    padding: var(--cell-padding);
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px #000a;
+}
+
+.prelimCell .splash {
+    position: relative;
+    width: auto;
+    height: auto;
+    background-size: cover;
+    background-image:
+        linear-gradient(to bottom, #000a, #0000),
+        var(--background-image-url)
+    ;
+    border-radius: 7px;
+}
+
+.prelimCell .poster{
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    z-index: -1;
+    position: relative;
+    overflow: hidden;
+}
+
+.prelimCell .animeName {
+    color: black;
+    size: 100%;
+    font-size: x-large;
+    text-decoration: none;
+    font-weight: bold;
+    position: absolute;
+    left: 0; right: 0; bottom: 0; top: 0;
+    padding: 5px;
+    color: rgb(216, 204, 204);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.prelimCell .pointSum {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    justify-self: center;
+    color: white;
+    font-size: x-large;
+    font-weight: bold;
+}

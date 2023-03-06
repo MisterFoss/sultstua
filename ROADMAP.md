@@ -181,7 +181,7 @@ Frontend-backend-needs:
 
 
 
-
+id PK, tournament id FK, anilist_id foringn FK, bracket_stage, bracket possition
 
  
 +-------+-------+                        +----------------------------------+                         +-------+-------+ 

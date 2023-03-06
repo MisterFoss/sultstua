@@ -1,5 +1,14 @@
 version: "3.3"  # optional since v1.27.0
 services:
+  # web:  
+  #   build: ./web
+  #   expose:
+  #     - '3000'
+  #   restart: unless-stopped
+  #   networks:
+  #     - sultstua-internal
+  #   command: sh -c "cd /var/sultstua && npm start"
+  #   volumes:
   nginx:
     image: nginx:latest
     expose:
